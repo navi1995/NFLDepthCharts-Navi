@@ -23,14 +23,11 @@ The project is organised into several folders:
 - `Repositories`: Contains the repository classes responsible for data persistence and retrieval.
 - `Services`: Contains the service classes that encapsulate the business logic and interact with the repositories.
 
-For running the application, you can use the following steps:
-- Run the application using `dotnet run` or using Visual Studio, Swagger has been setup for Development.
-
 Note that AutoMapper is used in various locations, if a new Entity is ever added or new mapping is required remember to add this to AutoMapperProfile.cs
 
 Also DI is used for so remember to add any new services to the DI container in the `Program.cs` file.
 
-Generally do any filtering in the data/repository layer to limit the amount of data being pulled over the network. `.AsNoTracking` has been used in most calls as the current functionality is all Read only.
+Generally do any filtering in the data/repository layer to limit the amount of data being pulled over the network. `.AsNoTracking` has been used in most calls as most of the current functionality is all Read only.
 
 Right now because the solution is using in-memory DB, seeding is occurring in `Program.cs`. If we ever move to SQL, this should be updated and a EF Migration should be created
 
