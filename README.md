@@ -70,6 +70,7 @@ The following patterns or approaches were used to ensure adhereing to SOLID prin
 - Move validation/exceptions to a seperate Exception classes rather than use generic ValidationException for them all
 - Add StatusCode attribute to ValidationException, which could be used to determine which StatusCode the ApiExceptionMiddleware returns
 - API versioning for backwards compatibility (e.g when Teams/Sports functionality is added)
+- Once shifted to SQL, create a EF migration using `dotnet ef migrations add InitialSeedPositions` and then add in the data as required; then run `dotnet ef database update` with the relevant connection strings
 - I would generally use the **Builder Pattern** in tests for creating our Entity objects using `Test{Entity}Builder.cs` where object instantiation occurs often, to improve readability and reusable code. However in the interest of time I did a lot of copy and pasting and thought this would be a good future improvement.
 - Use AutoFac over Microsoft DI, especially for unit tests to clean up the setup a bit by being able to resolve through interfaces rather than the concrete implementation (for example in my validator classes, I'm instantiating concrete validators. I'd prefer to do something like...)
     ```
