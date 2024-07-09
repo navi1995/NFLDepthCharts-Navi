@@ -18,6 +18,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<Position> GetByNameAsync(string name)
         {
+            _logger.LogInformation("Getting Position by name");
+
             return await _context
                 .Positions
                 .AsNoTracking()

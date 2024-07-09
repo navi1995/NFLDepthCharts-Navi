@@ -20,6 +20,8 @@ namespace NFLDepthCharts.API.Controllers
         [HttpPost("addPlayerToDepthChart")]
         public async Task<IActionResult> AddPlayerToDepthChart([FromBody] AddPlayerToDepthChartDto dto)
         {
+            _logger.LogInformation(nameof(AddPlayerToDepthChart));
+
             var result = await _depthChartService.AddPlayerToDepthChart(dto);
             return result ? CreatedAtAction(nameof(AddPlayerToDepthChart), null) : BadRequest();
         }
@@ -27,6 +29,8 @@ namespace NFLDepthCharts.API.Controllers
         [HttpDelete("removePlayerFromDepthChart")]
         public async Task<ActionResult<PlayerDto>> RemovePlayerFromDepthChart(string position, int playerNumber)
         {
+            _logger.LogInformation(nameof(RemovePlayerFromDepthChart));
+
             var player = await _depthChartService.RemovePlayerFromDepthChart(position, playerNumber);
             return player != null ? Ok(player) : NotFound();
         }
@@ -34,6 +38,8 @@ namespace NFLDepthCharts.API.Controllers
         [HttpGet("getBackups")]
         public async Task<ActionResult<List<PlayerDto>>> GetBackups(string position, int playerNumber)
         {
+            _logger.LogInformation(nameof(GetBackups));
+
             var backups = await _depthChartService.GetBackups(position, playerNumber);
             return Ok(backups);
         }
@@ -41,6 +47,8 @@ namespace NFLDepthCharts.API.Controllers
         [HttpGet("getFullDepthChart")]
         public async Task<ActionResult<FullDepthChartDto>> GetFullDepthChart()
         {
+            _logger.LogInformation(nameof(GetFullDepthChart));
+
             var depthChart = await _depthChartService.GetFullDepthChart();
             return Ok(depthChart);
         }

@@ -44,6 +44,8 @@ namespace NFLDepthCharts.API.Services
 
         public async Task<bool> AddPlayerToDepthChart(AddPlayerToDepthChartDto dto)
         {
+            _logger.LogInformation("Adding player to depth chart {0}", dto.PlayerName);
+
             _addPlayerToDepthChartDtoValidator.Validate(dto);
             var positionEntity = await _positionRepository.GetByNameAsync(dto.Position);
             _positionValidator.Validate(positionEntity);
@@ -88,6 +90,8 @@ namespace NFLDepthCharts.API.Services
 
         public async Task<PlayerDto> RemovePlayerFromDepthChart(string position, int playerNumber)
         {
+            _logger.LogInformation("Removing player from depth chart Position: {0} Number: {1}", position, playerNumber);
+
             var positionEntity = await _positionRepository.GetByNameAsync(position);
             _positionValidator.Validate(positionEntity);
 
@@ -119,6 +123,8 @@ namespace NFLDepthCharts.API.Services
 
         public async Task<IEnumerable<PlayerDto>> GetBackups(string position, int playerNumber)
         {
+            _logger.LogInformation("Getting backups from depth chart Position: {0} Number: {1}", position, playerNumber);
+
             var positionEntity = await _positionRepository.GetByNameAsync(position);
             _positionValidator.Validate(positionEntity);
 
@@ -132,6 +138,8 @@ namespace NFLDepthCharts.API.Services
 
         public async Task<FullDepthChartDto> GetFullDepthChart()
         {
+            _logger.LogInformation("Getting full depth chart");
+
             var depthChart = await _depthChartRepository.GetFullDepthChartAsync();
 
             return _mapper.Map<FullDepthChartDto>(depthChart);

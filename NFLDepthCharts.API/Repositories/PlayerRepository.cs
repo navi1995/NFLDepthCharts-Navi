@@ -18,6 +18,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<Player> GetByNumberAsync(int number)
         {
+            _logger.LogInformation("Getting Player by Number");
+
             return await _context
                 .Players
                 .AsNoTracking()
@@ -26,6 +28,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<Player> AddAsync(Player player)
         {
+            _logger.LogInformation("Adding Player");
+
             _context.Players.Add(player);
             await _context.SaveChangesAsync();
             return player;

@@ -68,7 +68,7 @@ The following patterns or approaches were used to ensure adhereing to SOLID prin
 - Teams/Sport functionality not required yet, however would be doable using the Entities I have left in the solution
 
 ## Potential Improvements
-- ADD LOGS!! Didn't get a chance to add any meaningful ones but in a prod environment this would be very important.
+- ADD MEANINGFUL LOGS!! Didn't get a chance to add any meaningful ones but in a prod environment this would be very important.
 - Add a migration script to add some dummy data for DB if SQL used (right now)
 - Move validation/exceptions to a seperate Exception classes rather than use generic ValidationException for them all
 - Add StatusCode attribute to ValidationException, which could be used to determine which StatusCode the ApiExceptionMiddleware returns

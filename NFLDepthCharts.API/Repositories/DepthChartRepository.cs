@@ -19,6 +19,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<IEnumerable<DepthChartEntry>> GetEntriesByPositionAsync(int positionId)
         {
+            _logger.LogInformation("Getting Depth Entries by Position ID");
+
             return await _context.DepthChartEntries
                 .Where(d => d.PositionId == positionId)
                 .OrderBy(d => d.DepthLevel)
@@ -27,6 +29,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<int> GetMaxDepthForPositionAsync(int positionId)
         {
+            _logger.LogInformation("Getting maximum current depth for a position");
+
             return await _context.DepthChartEntries
                 .AsNoTracking()
                 .Where(d => d.PositionId == positionId)
@@ -35,12 +39,16 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task UpdateEntriesDepthAsync(IEnumerable<DepthChartEntry> entries)
         {
+            _logger.LogInformation("Updating Depth levels");
+
             _context.DepthChartEntries.UpdateRange(entries);
             await _context.SaveChangesAsync();
         }
 
         public async Task<DepthChartEntry> AddEntryAsync(DepthChartEntry entry)
         {
+            _logger.LogInformation("Adding depth entries");
+
             _context.DepthChartEntries.Add(entry);
             await _context.SaveChangesAsync();
             return entry;
@@ -48,6 +56,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<DepthChartEntry> RemoveEntryAsync(int positionId, int playerId)
         {
+            _logger.LogInformation("Removing depth entry");
+
             var entry = await _context.DepthChartEntries
                 .FirstOrDefaultAsync(d => d.PositionId == positionId && d.PlayerId == playerId);
 
@@ -62,6 +72,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<IEnumerable<DepthChartEntry>> GetBackupsAsync(int positionId, int playerId)
         {
+            _logger.LogInformation("Getting backup Depth Entries for player");
+
             var playerDepth = await _context.DepthChartEntries
                 .AsNoTracking()
                 .Where(d => d.PositionId == positionId && d.PlayerId == playerId)
@@ -78,6 +90,8 @@ namespace NFLDepthCharts.API.Repositories
 
         public async Task<IDictionary<string, IEnumerable<Player>>> GetFullDepthChartAsync()
         {
+            _logger.LogInformation("Getting full Depth chart");
+
             var entries = await _context.DepthChartEntries
                 .AsNoTracking()
                 .Include(d => d.Position)
